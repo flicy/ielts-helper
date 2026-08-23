@@ -377,7 +377,8 @@ button:focus-visible,a:focus-visible{outline:2px solid rgba(255,255,255,.45);out
   <div class="card">
     <div class="ct"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>必备工具</div>
     <div class="rg">
-      <a class="ri" href="https://apps.apple.com/cn/app/id578380857" target="_blank" rel="noopener"><span class="e"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" x2="15" y1="20" y2="20"/><line x1="12" x2="12" y1="4" y2="20"/></svg></span><span class="nm">墨墨背单词</span><span class="h">IELTS 4000词库</span></a>
+      <a class="ri" href="https://www.baicizhan.com/" target="_blank" rel="noopener"><span class="e"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" x2="15" y1="20" y2="20"/><line x1="12" x2="12" y1="4" y2="20"/></svg></span><span class="nm">百词斩</span><span class="h">雅思词汇计划</span></a>
+      <a class="ri" href="https://www.idictation.cn/" target="_blank" rel="noopener"><span class="e"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5Zm18 0h-3a2 2 0 0 0-2 2v3a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-5Z"/><path d="M3 14v-3a9 9 0 0 1 18 0v3"/></svg></span><span class="nm">爱听写</span><span class="h">雅思习题单词</span></a>
       <a class="ri" href="https://apps.apple.com/cn/app/id966207540" target="_blank" rel="noopener"><span class="e"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg></span><span class="nm">雅思哥</span><span class="h">口语机经+模考</span></a>
       <a class="ri" href="https://www.grammarly.com" target="_blank" rel="noopener"><span class="e"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></span><span class="nm">Grammarly</span><span class="h">AI写作批改</span></a>
       <a class="ri" href="https://apps.apple.com/cn/app/id1119331792" target="_blank" rel="noopener"><span class="e"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5Zm18 0h-3a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-5Z"/><path d="M3 14v-3a9 9 0 0 1 18 0v3"/></svg></span><span class="nm">每日英语听力</span><span class="h">BBC/TED泛听</span></a>
@@ -452,9 +453,9 @@ function ic(n,s){const D={
 
 /* ================= 材料库：id -> 名称 + 链接 ================= */
 const MAT={
-  momo:{n:"墨墨背单词",u:"https://apps.apple.com/cn/app/id578380857"},
+  momo:{n:"百词斩",u:"https://www.baicizhan.com/"},
   ysg:{n:"雅思哥",u:"https://apps.apple.com/cn/app/id966207540"},
-  tsl:{n:"每日英语听力",u:"https://apps.apple.com/cn/app/id1119331792"},
+  idict:{n:"爱听写",u:"https://www.idictation.cn/"},
   anki:{n:"Anki",u:"https://apps.ankiweb.net"},
   lhb:{n:"刘洪波阅读真经",u:"https://search.jd.com/Search?keyword=刘洪波阅读真经总纲"},
   gjb:{n:"顾家北写作",u:"https://search.jd.com/Search?keyword=顾家北手把手教你雅思写作"},
@@ -465,8 +466,8 @@ const MAT={
   jj:{n:"口语机经",u:"https://search.jd.com/Search?keyword=雅思口语机经"}
 };
 /* 快速启动栏 */
-const QUICK=[["tsl","每日英语听力"],["momo","墨墨背单词"],["ysg","雅思哥"],["cat","雅思猫模考"],["grm","Grammarly"],["anki","Anki"]];
-const QICON={tsl:"headphones",momo:"type",ysg:"message-circle",cat:"monitor",grm:"circle-check",anki:"layers"};
+const QUICK=[["tsl","每日英语听力"],["momo","百词斩"],["idict","爱听写"],["ysg","雅思哥"],["cat","雅思猫模考"],["grm","Grammarly"],["anki","Anki"]];
+const QICON={tsl:"headphones",momo:"type",idict:"headphones",ysg:"message-circle",cat:"monitor",grm:"circle-check",anki:"layers"};
 
 /* ================= 12 周计划（daily 内容 + 对应材料） ================= */
 const P={
@@ -527,10 +528,10 @@ function streak(){
 function load(){
   try{
     const s=localStorage.getItem("ih2");
-    if(s){const o=JSON.parse(s);S=Object.assign(S,o);S.levels=o.levels||S.levels;S.days=o.days||{}}
+    if(s){const o=JSON.parse(s);S=Object.assign(S,o);S.levels=o.levels||S.levels;S.days=o.days||{};if(o.startDate==="2026-08-15")S.startDate="2026-08-24"}
   }catch(e){}
   const t=todayKey();
-  S.startDate=S.startDate||"2026-08-15";
+  S.startDate=S.startDate||"2026-08-24";
   S.examDate=S.examDate||"2026-09-26";
   save();
 }
