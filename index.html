@@ -3,169 +3,255 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<meta name="theme-color" content="#1E2235">
 <title>IELTS 7 · 雅思学习助手</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;700;900&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#F7F5EF;--bg-card:#FFFFFF;--bg-soft:#F0EEE6;--bg-soft-h:#E8E5DA;
-  --bg-tab:#FFFFFF;--border:#E6E2D6;--border-l:#EFECE1;
-  --ink:#2A2D28;--ink2:#5B5F55;--ink3:#8B8F83;--ink4:#B9BCB0;
-  --accent:#2F6B4F;--accent-soft:rgba(47,107,79,0.09);--accent-line:rgba(47,107,79,0.22);
-  --warn:#A9760B;--warn-soft:rgba(169,118,11,0.10);
-  --danger:#B5493B;--danger-soft:rgba(181,73,59,0.08);
-  --r-lg:18px;--r-md:14px;--r-sm:10px;--r-full:9999px;
-  --serif:"Noto Serif SC","Songti SC","STSong","SimSun",serif;
-  --sans:"Noto Sans SC",-apple-system,"PingFang SC","Helvetica Neue",sans-serif;
-  --sb:env(safe-area-inset-bottom,0px);--th:76px
+  /* ===== 夜空玻璃主题（唯一事实源：design/weather-template-DESIGN.md） ===== */
+  --sky1:#1E2235;--sky2:#2B2F4A;
+  --glass:rgba(108,91,212,.55);--glass2:rgba(108,91,212,.42);--glass3:rgba(108,91,212,.30);
+  --hib:rgba(255,255,255,.35);--bd:rgba(255,255,255,.12);
+  --ink:#FFFFFF;--ink2:rgba(255,255,255,.85);--ink3:rgba(255,255,255,.62);--ink4:rgba(255,255,255,.42);
+  --sun:#F5C842;--cyan:#3EC6E8;--pink:#E8A2BC;--warm:#F0C060;--deep:#3D3470;
+  --env:0 12px 32px rgba(20,16,60,.35);
+  /* 兼容旧变量名 → 新值（防止遗留内联样式漏网） */
+  --bg:transparent;--bg-card:rgba(108,91,212,.55);--bg-soft:rgba(20,16,60,.28);--bg-soft-h:rgba(255,255,255,.10);
+  --bg-tab:rgba(30,27,64,.74);--border:rgba(255,255,255,.12);--border-l:rgba(255,255,255,.08);
+  --accent:#C9A0EE;--accent-soft:rgba(143,107,224,.20);--accent-line:rgba(201,160,238,.35);
+  --warn:#F0C060;--warn-soft:rgba(240,192,96,.14);
+  --danger:#E8A2BC;--danger-soft:rgba(232,162,188,.10);
+  --r-lg:30px;--r-md:22px;--r-sm:16px;--r-full:9999px;
+  --sans:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","PingFang SC","Helvetica Neue","Segoe UI",Roboto,sans-serif;
+  --sb:env(safe-area-inset-bottom,0px);--th:62px
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html,body{font-family:var(--sans);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden;min-height:100dvh;-webkit-tap-highlight-color:transparent}
-body{padding-bottom:calc(var(--th)+var(--sb)+8px)}
-.header{padding:44px 20px 18px;text-align:center}
-.header h1{font-family:var(--serif);font-size:30px;font-weight:900;letter-spacing:.5px;color:var(--ink)}
-.header h1 .hl{color:var(--accent)}
-.header .sub{font-size:13px;color:var(--ink3);margin-top:6px;letter-spacing:.6px}
-.cd{margin:8px 16px 14px;padding:18px 20px;border-radius:var(--r-lg);background:var(--bg-card);border:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
-.cd-l .days{font-size:40px;font-weight:900;font-family:var(--serif);color:var(--accent);line-height:1;font-variant-numeric:tabular-nums}
-.cd-l .label{font-size:12px;color:var(--ink3);margin-top:4px;letter-spacing:1px}
-.cd-r{text-align:right}
-.cd-r .badge{display:inline-block;padding:5px 14px;border-radius:var(--r-full);font-size:12px;font-weight:600;background:var(--accent-soft);color:var(--accent);border:1px solid var(--accent-line)}
-.cd-r .wl{font-size:12px;color:var(--ink3);margin-top:5px}
-.ps{margin:0 16px 14px;display:flex;gap:8px;padding:4px;background:var(--bg-card);border-radius:var(--r-lg);border:1px solid var(--border)}
-.pi{flex:1;text-align:center;padding:10px 4px;border-radius:var(--r-md);font-size:11px;font-weight:600;color:var(--ink3);transition:all .3s;border:1px solid transparent}
-.pi.active{color:var(--accent);background:var(--bg-soft);border-color:var(--border)}
-.pi .dot{display:block;width:6px;height:6px;border-radius:50%;margin:0 auto 4px;background:var(--ink4)}
-.pi.active .dot{background:var(--accent)}
-.pi small{display:block;font-size:10px;opacity:.65;margin-top:1px}
-.ws{display:flex;gap:6px;padding:0 16px 16px;overflow-x:auto;scrollbar-width:none}
+html{color-scheme:dark}
+html,body{font-family:var(--sans);background:linear-gradient(180deg,var(--sky1) 0%,var(--sky2) 100%);background-attachment:fixed;color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden;min-height:100dvh;-webkit-tap-highlight-color:transparent}
+body{padding-bottom:calc(var(--th) + var(--sb) + 30px)}
+/* ---- z0 氛围层：星点 + 紫色光斑（不可交互） ---- */
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background-image:
+radial-gradient(1.5px 1.5px at 12% 22%,rgba(255,255,255,.32) 50%,transparent 51%),
+radial-gradient(1px 1px at 68% 12%,rgba(255,255,255,.24) 50%,transparent 51%),
+radial-gradient(1.2px 1.2px at 42% 64%,rgba(255,255,255,.20) 50%,transparent 51%),
+radial-gradient(1px 1px at 86% 48%,rgba(255,255,255,.28) 50%,transparent 51%),
+radial-gradient(1.4px 1.4px at 24% 82%,rgba(255,255,255,.18) 50%,transparent 51%),
+radial-gradient(1px 1px at 56% 34%,rgba(255,255,255,.22) 50%,transparent 51%),
+radial-gradient(1.1px 1.1px at 8% 54%,rgba(255,255,255,.16) 50%,transparent 51%),
+radial-gradient(1px 1px at 78% 78%,rgba(255,255,255,.24) 50%,transparent 51%);
+background-size:340px 340px}
+.amb{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.amb .glow{position:absolute;border-radius:50%}
+.amb .g1{width:560px;height:560px;top:-170px;left:-170px;background:radial-gradient(circle closest-side,rgba(201,160,238,.30),transparent 72%)}
+.amb .g2{width:700px;height:700px;top:16%;right:-250px;background:radial-gradient(circle closest-side,rgba(143,107,224,.26),transparent 72%)}
+.amb .g3{width:460px;height:460px;bottom:-170px;right:-90px;background:radial-gradient(circle closest-side,rgba(227,184,232,.14),transparent 72%)}
+/* ---- z1 内容列：430 单列，桌面居中同宽 ---- */
+.app{position:relative;z-index:1;max-width:430px;margin:0 auto;padding:0 18px}
+.ic{display:inline-block;vertical-align:middle;flex-shrink:0}
+.ic.i14{width:14px;height:14px}
+/* ---- 页头 ---- */
+.header{padding:46px 2px 10px;text-align:center}
+.header h1{font-size:23px;font-weight:600;letter-spacing:.5px;color:var(--ink);display:flex;align-items:center;justify-content:center;gap:8px}
+.header h1 .ic{width:21px;height:21px;color:#C9A0EE}
+.header h1 .hl{color:#C9A0EE}
+.header .sub{font-size:12px;color:var(--ink3);margin-top:7px;letter-spacing:.8px}
+/* ---- 英雄锚点：倒计时大数字（Thin 白） ---- */
+.hero{padding:14px 6px 20px;display:flex;justify-content:space-between;align-items:flex-end}
+.hero .days{font-size:clamp(64px,21vw,86px);font-weight:200;line-height:.95;letter-spacing:-.02em;color:var(--ink);font-variant-numeric:tabular-nums}
+.hero .days .ic{width:52px;height:52px;color:#F5C842}
+.hero .label{font-size:12px;color:var(--ink3);margin-top:10px;letter-spacing:2.5px}
+.hero .cd-r{text-align:right;padding-bottom:8px}
+.hero .badge{display:inline-block;padding:7px 15px;border-radius:var(--r-full);font-size:12px;font-weight:600;color:var(--ink2);background:var(--glass3);border:1px solid var(--bd);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);box-shadow:inset 1px 1px 0 rgba(255,255,255,.22)}
+.hero .wl{font-size:12px;color:var(--ink3);margin-top:8px}
+/* ---- 阶段指示 chips ---- */
+.ps{display:flex;gap:8px;margin-bottom:14px}
+.pi{flex:1;text-align:center;padding:10px 4px;border-radius:18px;font-size:11px;font-weight:600;color:var(--ink3);border:1px solid transparent;background:var(--glass3);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);box-shadow:inset 1px 1px 0 rgba(255,255,255,.14)}
+.pi .dot{display:block;width:6px;height:6px;border-radius:50%;margin:0 auto 5px;background:var(--ink4)}
+.pi#p1 .dot{background:var(--cyan)}.pi#p2 .dot{background:var(--warm)}.pi#p3 .dot{background:var(--pink)}
+.pi.act{color:var(--ink2);background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.22);box-shadow:inset 1px 1px 0 rgba(255,255,255,.30)}
+.pi small{display:block;font-size:10px;opacity:.6;margin-top:2px}
+/* ---- 周滚动 chips ---- */
+.ws{display:flex;gap:7px;padding:0 2px 16px;overflow-x:auto;scrollbar-width:none}
 .ws::-webkit-scrollbar{display:none}
-.wb{flex-shrink:0;padding:8px 16px;border-radius:var(--r-full);border:1px solid var(--border);background:var(--bg-card);color:var(--ink2);font-size:13px;font-weight:500;cursor:pointer;transition:all .25s;white-space:nowrap}
+.wb{flex-shrink:0;padding:9px 16px;border-radius:var(--r-full);border:1px solid var(--bd);background:var(--glass3);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);color:var(--ink2);font-size:13px;font-weight:500;cursor:pointer;white-space:nowrap;box-shadow:inset 1px 1px 0 rgba(255,255,255,.16);font-family:var(--sans)}
 .wb:active{transform:scale(.96)}
-.wb.active{background:var(--accent);color:#fff;border-color:var(--accent)}
-.wb.done{border-color:var(--accent-line);color:var(--accent)}
+.wb.active{background:linear-gradient(180deg,#8A7AE0,#6C5BD4);color:#fff;border-color:transparent;box-shadow:inset 1px 1px 2px rgba(255,255,255,.45),0 4px 10px rgba(30,25,70,.35)}
+.wb.done{border-color:rgba(255,255,255,.28);color:var(--ink2)}
 .wb.done::after{content:" ✓";font-size:11px}
-.card{margin:0 16px 14px;border-radius:var(--r-lg);padding:22px;background:var(--bg-card);border:1px solid var(--border)}
-.ct{font-size:15px;font-weight:700;font-family:var(--serif);margin-bottom:16px;display:flex;align-items:center;gap:8px}
-.ct .hint{font-size:11px;font-weight:400;color:var(--ink3)}
-.task{display:flex;align-items:flex-start;gap:12px;padding:13px 0;border-bottom:1px solid var(--border-l)}
+/* ---- 玻璃容器卡（z1 浮层） ---- */
+.card{margin:0 0 14px;border-radius:var(--r-lg);padding:20px 18px;background:var(--glass);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);border:1px solid var(--bd);box-shadow:inset 1px 1px 0 var(--hib),var(--env)}
+.ct{font-size:15px;font-weight:600;margin-bottom:16px;display:flex;align-items:center;gap:8px;color:var(--ink)}
+.ct .ic{width:18px;height:18px;color:var(--ink2)}
+.ct .hint{font-size:11px;font-weight:400;color:var(--ink4);margin-left:auto}
+/* ---- 任务 ---- */
+.task{display:flex;align-items:flex-start;gap:12px;padding:13px 0;border-bottom:1px solid rgba(255,255,255,.08)}
 .task:last-child{border-bottom:none}
-.tc{width:22px;height:22px;border-radius:50%;border:2px solid var(--ink3);flex-shrink:0;cursor:pointer;transition:all .2s;margin-top:1px;background:transparent;-webkit-appearance:none;appearance:none;position:relative}
-.tc:checked{background:var(--accent);border-color:var(--accent)}
-.tc:checked::after{content:"✓";color:#fff;font-size:13px;font-weight:700;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
+.tc{width:22px;height:22px;border-radius:50%;border:2px solid rgba(255,255,255,.45);flex-shrink:0;cursor:pointer;margin-top:1px;background:transparent;-webkit-appearance:none;appearance:none;position:relative;transition:background .18s,border-color .18s}
+.tc:checked{background:linear-gradient(180deg,#8A7AE0,#6C5BD4);border-color:transparent;box-shadow:inset 1px 1px 2px rgba(255,255,255,.4)}
+.tc:checked::after{content:"✓";color:#fff;font-size:13px;font-weight:700;position:absolute;top:50%;left:50%;transform:translate(-50%,-52%)}
+.tc:focus-visible{outline:2px solid rgba(255,255,255,.5);outline-offset:2px}
 .tk{flex:1;min-width:0}
-.tt{font-size:14px;font-weight:500}
-.td{font-size:12px;color:var(--ink3);margin-top:3px}
+.tt{font-size:14px;font-weight:500;color:var(--ink2);display:flex;align-items:center;gap:7px;line-height:1.45}
+.tt .ic{width:16px;height:16px;color:var(--ink3)}
+.td{font-size:12px;color:var(--ink4);margin-top:3px}
 .tc:checked~.tk .tt{text-decoration:line-through;color:var(--ink4)}
-/* 任务直达链接 chip */
-.tlink{flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;min-width:34px;height:34px;padding:0 10px;border-radius:var(--r-sm);background:var(--accent-soft);border:1px solid var(--accent-line);color:var(--accent);text-decoration:none;font-size:16px;transition:all .18s;margin-top:-3px}
-.tlink:active{transform:scale(.94);background:var(--accent)}
-.tlink .ln{font-size:11px;font-weight:600;margin-left:3px}
-.pb{height:6px;background:var(--bg-soft);border-radius:3px;overflow:hidden;margin:10px 0}
-.pb .fl{height:100%;border-radius:3px;background:var(--accent);transition:width .5s}
+/* 任务直达链接 chip（胶囊） */
+.tlink{flex-shrink:0;display:inline-flex;align-items:center;gap:4px;height:30px;padding:0 11px;border-radius:var(--r-full);background:var(--glass3);border:1px solid var(--bd);color:var(--ink2);text-decoration:none;font-size:11px;font-weight:600;box-shadow:inset 1px 1px 0 rgba(255,255,255,.16);margin-top:-2px}
+.tlink .ic{width:13px;height:13px;color:var(--ink3)}
+.tlink:active{transform:scale(.94);background:rgba(255,255,255,.14)}
+.tlink .ln{font-weight:600}
+.pb{height:6px;background:rgba(20,16,60,.38);border-radius:3px;overflow:hidden;margin:12px 0;box-shadow:inset 1px 2px 3px rgba(20,16,60,.35)}
+.pb .fl{height:100%;border-radius:3px;background:linear-gradient(90deg,#C9A0EE,#8F6BE0);transition:width .5s}
 .sr{display:flex;align-items:center;gap:10px;margin-bottom:12px}
-.sl{width:44px;font-size:12px;font-weight:600;flex-shrink:0;color:var(--ink2)}
-.sb2{flex:1;height:5px;background:var(--bg-soft);border-radius:3px;overflow:hidden}
-.sb2 .fl{height:100%;border-radius:3px;transition:width .5s;background:var(--accent)}
-.sb2.rd .fl{background:var(--accent)}.sb2.wr .fl{background:var(--accent)}.sb2.sp .fl{background:var(--accent)}
-.sc{font-size:13px;font-weight:700;color:var(--ink2);width:32px;text-align:right}
+.sl{font-size:12px;font-weight:600;flex-shrink:0;color:var(--ink2);display:inline-flex;align-items:center;gap:6px;min-width:62px}
+.sl .ic{width:15px;height:15px;color:var(--ink3)}
+.sb2{flex:1;height:5px;background:rgba(20,16,60,.38);border-radius:3px;overflow:hidden;box-shadow:inset 1px 2px 3px rgba(20,16,60,.35)}
+.sb2 .fl{height:100%;border-radius:3px;transition:width .5s;background:linear-gradient(90deg,#C9A0EE,#8F6BE0)}
+.sc{font-size:13px;font-weight:600;color:var(--ink2);width:32px;text-align:right}
+/* ---- 计时 ---- */
 .td2{text-align:center;padding:12px 0 8px}
-.td2 .tm{font-size:64px;font-weight:900;font-family:var(--serif);font-variant-numeric:tabular-nums;letter-spacing:-2px;color:var(--accent);line-height:1}
-.tbtns{display:flex;gap:10px;justify-content:center;margin-top:16px}
-.tbtn{padding:12px 32px;border-radius:var(--r-full);border:none;font-size:15px;font-weight:600;cursor:pointer;transition:all .18s;font-family:var(--sans)}
-.tbtn:active{transform:scale(.95)}
-.tbtn.st{background:var(--accent);color:#fff}
-.tbtn.pa{background:var(--warn);color:#fff}
-.tbtn.rs{background:var(--bg-soft);color:var(--ink2);border:1px solid var(--border)}
-.tbtn.bl{background:var(--accent);color:#fff;width:100%}
-.tpres{display:flex;gap:6px;justify-content:center;margin-top:14px}
-.tp{padding:6px 16px;border-radius:var(--r-full);border:1px solid var(--border);background:var(--bg-card);color:var(--ink3);font-size:13px;font-weight:500;cursor:pointer;transition:all .18s;font-family:var(--sans)}
-.tp:active{transform:scale(.95)}
-.tp.act{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
-/* 快速开始 */
+.td2 .tm{font-size:64px;font-weight:200;font-variant-numeric:tabular-nums;letter-spacing:-.01em;color:var(--ink);line-height:1}
+.tbtns{display:flex;gap:10px;justify-content:center;margin-top:18px}
+.tbtn{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:12px 30px;border-radius:var(--r-full);border:none;font-size:15px;font-weight:600;cursor:pointer;font-family:var(--sans)}
+.tbtn .ic{width:16px;height:16px}
+.tbtn:active{transform:scale(.96)}
+.tbtn.st{background:linear-gradient(180deg,#8A7AE0,#6C5BD4);color:#fff;box-shadow:inset 1px 1px 2px rgba(255,255,255,.5),-3px -3px 8px rgba(255,255,255,.14),0 6px 12px rgba(30,25,70,.35)}
+.tbtn.st:active{box-shadow:inset 1px 1px 2px rgba(255,255,255,.5),0 3px 6px rgba(30,25,70,.35)}
+.tbtn.pa{background:linear-gradient(180deg,#F4CE7E,#E8B054);color:var(--deep);box-shadow:inset 1px 1px 2px rgba(255,255,255,.5),-3px -3px 8px rgba(255,255,255,.14),0 6px 12px rgba(30,25,70,.35)}
+.tbtn.pa:active{box-shadow:inset 1px 1px 2px rgba(255,255,255,.5),0 3px 6px rgba(30,25,70,.35)}
+.tbtn.rs{background:rgba(20,16,60,.30);color:var(--ink2);border:1px solid var(--bd);box-shadow:inset 2px 2px 4px rgba(20,16,60,.4),inset -1px -1px 2px rgba(255,255,255,.22)}
+.tpres{display:flex;gap:8px;justify-content:center;margin-top:14px}
+.tp{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:var(--r-full);border:1px solid transparent;background:var(--glass3);color:var(--ink3);font-size:13px;font-weight:500;cursor:pointer;font-family:var(--sans);box-shadow:inset 1px 1px 0 rgba(255,255,255,.14)}
+.tp .ic{width:14px;height:14px}
+.tp:active{transform:scale(.96)}
+.tp.act{color:var(--ink);background:rgba(20,16,60,.32);border-color:rgba(255,255,255,.10);box-shadow:inset 2px 2px 4px rgba(20,16,60,.4),inset -1px -1px 2px rgba(255,255,255,.22)}
+/* ---- 快速开始 ---- */
 .qrow{display:flex;gap:8px;overflow-x:auto;padding:2px 0 6px;scrollbar-width:none}
 .qrow::-webkit-scrollbar{display:none}
-.qchip{flex-shrink:0;display:flex;align-items:center;gap:6px;padding:10px 14px;border-radius:var(--r-full);background:var(--bg-soft);border:1px solid var(--border);font-size:13px;font-weight:600;color:var(--ink2);text-decoration:none;transition:all .18s}
-.qchip:active{transform:scale(.95);background:var(--accent-soft);color:var(--accent)}
+.qchip{flex-shrink:0;display:inline-flex;align-items:center;gap:7px;padding:10px 14px;border-radius:var(--r-full);background:var(--glass3);border:1px solid var(--bd);font-size:13px;font-weight:600;color:var(--ink2);text-decoration:none;box-shadow:inset 1px 1px 0 rgba(255,255,255,.16)}
+.qchip .ic{width:15px;height:15px;color:var(--ink3)}
+.qchip:active{transform:scale(.96);background:rgba(255,255,255,.13)}
 .qchip small{font-weight:400;font-size:10px;color:var(--ink4)}
-/* 复盘表单 */
-.dsum{font-size:12px;color:var(--ink2);line-height:1.7;background:var(--bg-soft);border-radius:var(--r-sm);padding:10px 12px;margin-bottom:14px;border:1px solid var(--border-l)}
+/* ---- 复盘表单 ---- */
+.dsum{font-size:12px;color:var(--ink2);line-height:1.7;background:rgba(20,16,60,.30);border-radius:var(--r-sm);padding:11px 13px;margin-bottom:14px;border:1px dashed rgba(255,255,255,.18)}
 .rvf{display:flex;flex-direction:column;gap:10px}
 .rvf .row{display:flex;gap:10px}
 .rfield{flex:1;display:flex;flex-direction:column;gap:5px}
 .rlabel{font-size:11px;font-weight:600;color:var(--ink3);letter-spacing:.4px}
-.rin{width:100%;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-sm);padding:11px 12px;color:var(--ink);font-size:14px;font-family:var(--sans);outline:none;transition:border .18s}
-.rin:focus{border-color:var(--accent)}
+.rin{width:100%;background:rgba(20,16,60,.30);border:1px solid rgba(255,255,255,.12);border-radius:var(--r-sm);padding:11px 12px;color:var(--ink);font-size:14px;font-family:var(--sans);outline:none;transition:border-color .18s;box-shadow:inset 1px 2px 4px rgba(20,16,60,.30)}
+.rin:focus{border-color:rgba(255,255,255,.40)}
 textarea.rin{resize:none;min-height:58px;line-height:1.6}
 .rin::placeholder{color:var(--ink4)}
 .flash{animation:fl 1.4s ease}
-@keyframes fl{0%,100%{box-shadow:none}25%{box-shadow:0 0 0 3px rgba(47,107,79,.4)}60%{box-shadow:0 0 0 3px rgba(47,107,79,.15)}}
-/* 打卡文案 */
-.cibox{background:var(--accent-soft);border:1px dashed var(--accent-line);border-radius:var(--r-md);padding:16px;font-size:13px;line-height:1.9;color:var(--ink2);white-space:pre-wrap;word-break:break-all;user-select:all;-webkit-user-select:all}
+@keyframes fl{0%,100%{box-shadow:inset 1px 1px 0 var(--hib),var(--env)}25%{box-shadow:0 0 0 3px rgba(201,160,238,.5),var(--env)}60%{box-shadow:0 0 0 3px rgba(201,160,238,.18),var(--env)}}
+/* ---- 打卡文案 + 新拟物 FAB ---- */
+.cibox{background:rgba(20,16,60,.30);border:1px dashed rgba(255,255,255,.22);border-radius:18px;padding:16px;font-size:13px;line-height:1.9;color:var(--ink2);white-space:pre-wrap;word-break:break-all;user-select:all;-webkit-user-select:all}
 .cihint{font-size:11px;color:var(--ink4);margin-top:12px;text-align:center}
-/* 本周打卡格子 */
+.fabrow{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:16px}
+.fab{width:60px;height:60px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#8A7AE0,#6C5BD4);box-shadow:inset 1px 1px 2px rgba(255,255,255,.5),-3px -3px 8px rgba(255,255,255,.15),0 6px 12px rgba(30,25,70,.35);transition:transform .15s,box-shadow .15s;flex-shrink:0}
+.fab .ic{width:24px;height:24px;color:var(--deep);stroke-width:2.2}
+.fab:active{transform:scale(.96);box-shadow:inset 1px 1px 2px rgba(255,255,255,.5),0 3px 6px rgba(30,25,70,.4)}
+.fab:focus-visible{outline:2px solid rgba(255,255,255,.5);outline-offset:3px}
+.fablab b{display:block;font-size:14px;font-weight:600;color:var(--ink2)}
+.fablab small{display:block;font-size:11px;color:var(--ink4);margin-top:3px}
+/* ---- 本周打卡格子 ---- */
 .wkg{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
-.wkc{aspect-ratio:1/1.15;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border-radius:var(--r-sm);background:var(--bg-soft);border:1px solid var(--border-l);font-size:10px;color:var(--ink4)}
-.wkc b{font-size:13px;color:var(--ink3);font-weight:700}
-.wkc.today{border-color:var(--accent)}
-.wkc.p1{background:var(--accent-soft)}
-.wkc.p2{background:var(--accent);border-color:var(--accent)}
+.wkc{aspect-ratio:1/1.15;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border-radius:14px;background:var(--glass3);border:1px solid rgba(255,255,255,.08);font-size:10px;color:var(--ink4);box-shadow:inset 1px 1px 0 rgba(255,255,255,.12)}
+.wkc b{font-size:13px;color:var(--ink3);font-weight:600}
+.wkc.today{border-color:rgba(255,255,255,.45)}
+.wkc.p1{background:rgba(255,255,255,.13)}
+.wkc.p2{background:linear-gradient(160deg,#8A7AE0,#6C5BD4);border-color:transparent;box-shadow:inset 1px 1px 2px rgba(255,255,255,.4),0 4px 10px rgba(30,25,70,.30)}
 .wkc.p2 b{color:#fff}
-.wkc.p2:not(.today):not(.future){color:#fff}
-.wkc.future{opacity:.5}
-/* 历史列表 */
-.hist-day{display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid var(--border-l)}
+.wkc.p2:not(.today):not(.future){color:rgba(255,255,255,.85)}
+.wkc.future{opacity:.45}
+/* ---- 历史列表 ---- */
+.hist-day{display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.08)}
 .hist-day:last-child{border-bottom:none}
-.hd-d{width:58px;font-size:13px;font-weight:600;flex-shrink:0}
+.hd-d{width:58px;font-size:13px;font-weight:600;flex-shrink:0;color:var(--ink2)}
 .hd-bar{flex:1}
 .hd-meta{width:118px;text-align:right;font-size:11px;color:var(--ink3);flex-shrink:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+/* ---- 资源格 ---- */
 .rg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-.ri{border-radius:var(--r-md);padding:16px 12px;text-align:center;background:var(--bg-soft);border:1px solid var(--border);cursor:pointer;transition:all .18s;text-decoration:none;color:inherit;display:block}
-.ri:active{transform:scale(.97);background:var(--accent-soft)}
-.ri .e{font-size:28px;display:block;margin-bottom:6px}
+.ri{border-radius:var(--r-md);padding:16px 12px;text-align:center;background:var(--glass3);border:1px solid var(--bd);cursor:pointer;text-decoration:none;color:inherit;display:block;box-shadow:inset 1px 1px 0 rgba(255,255,255,.18);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)}
+.ri:active{transform:scale(.97);background:rgba(255,255,255,.12)}
+.ri .e{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.10);box-shadow:inset 1px 1px 0 rgba(255,255,255,.30);margin:0 auto 9px}
+.ri .e .ic{width:22px;height:22px;color:var(--ink2)}
 .ri .nm{font-size:12px;font-weight:600;color:var(--ink2);display:block}
 .ri .h{font-size:10px;color:var(--ink4);display:block;margin-top:3px}
-.setr{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid var(--border-l)}
+/* ---- 设置 ---- */
+.setr{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.08)}
 .setr:last-child{border-bottom:none}
-.setr label{font-size:14px;font-weight:500;color:var(--ink2)}
-.setr input{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-sm);padding:8px 12px;color:var(--ink);font-size:14px;font-weight:500;width:130px;text-align:center;font-family:var(--sans);outline:none}
-.setr input:focus{border-color:var(--accent)}
+.setr label{font-size:14px;font-weight:500;color:var(--ink2);display:inline-flex;align-items:center;gap:7px}
+.setr label .ic{width:15px;height:15px;color:var(--ink3)}
+.setr input{background:rgba(20,16,60,.30);border:1px solid rgba(255,255,255,.12);border-radius:var(--r-sm);padding:8px 12px;color:var(--ink);font-size:14px;font-weight:500;width:130px;text-align:center;font-family:var(--sans);outline:none;box-shadow:inset 1px 2px 4px rgba(20,16,60,.30)}
+.setr input:focus{border-color:rgba(255,255,255,.40)}
 .setr input[type=date]{width:150px}
 .snote{font-size:11px;color:var(--ink3);line-height:1.7;padding:10px 2px}
-.rbtn{width:100%;padding:12px;border:1px dashed var(--danger);border-radius:var(--r-md);background:var(--danger-soft);color:var(--danger);font-size:13px;font-weight:600;cursor:pointer;margin-top:14px;font-family:var(--sans)}
-.rbtn:active{background:rgba(181,73,59,.14)}
-.impbtn{width:100%;padding:11px;border:1px solid var(--accent-line);border-radius:var(--r-md);background:var(--accent-soft);color:var(--accent);font-size:13px;font-weight:600;cursor:pointer;margin-top:10px;font-family:var(--sans)}
-.bnav{position:fixed;bottom:0;left:0;right:0;max-width:430px;margin:0 auto;height:calc(var(--th)+var(--sb));padding-bottom:var(--sb);background:var(--bg-tab);border-top:1px solid var(--border);border-left:1px solid var(--border-l);border-right:1px solid var(--border-l);border-radius:18px 18px 0 0;display:flex;justify-content:space-around;align-items:stretch;z-index:200;padding-top:8px;box-shadow:0 -8px 24px rgba(42,45,40,0.05)}
-.nav{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;background:none;border:none;color:var(--ink3);font-size:10px;font-weight:500;cursor:pointer;padding:0 12px;transition:all .18s;font-family:var(--sans);flex:1;position:relative}
-.nav.act{color:var(--accent)}
-.nav.act::before{content:"";position:absolute;top:-8px;left:50%;transform:translateX(-50%);width:22px;height:2.5px;border-radius:2px;background:var(--accent)}
-.page{display:none;animation:pin .35s}
+.rbtn{width:100%;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px;border:1.5px dashed rgba(232,162,188,.55);border-radius:var(--r-md);background:var(--danger-soft);color:var(--pink);font-size:13px;font-weight:600;cursor:pointer;margin-top:14px;font-family:var(--sans)}
+.rbtn .ic{width:16px;height:16px}
+.rbtn:active{background:rgba(232,162,188,.18)}
+.impbtn{width:100%;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px;border:1px solid var(--bd);border-radius:var(--r-md);background:var(--glass3);color:var(--ink2);font-size:13px;font-weight:600;cursor:pointer;margin-top:10px;font-family:var(--sans);box-shadow:inset 1px 1px 0 rgba(255,255,255,.16)}
+.impbtn .ic{width:16px;height:16px;color:var(--ink3)}
+.impbtn:active{transform:scale(.98);background:rgba(255,255,255,.12)}
+/* ---- 底部凹凸导航 ---- */
+.bnav{position:fixed;bottom:calc(var(--sb) + 12px);left:0;right:0;margin:0 auto;width:calc(100% - 24px);max-width:406px;height:var(--th);background:var(--bg-tab);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);border:1px solid var(--bd);border-radius:26px;display:flex;justify-content:space-around;align-items:stretch;z-index:200;padding:7px 4px;box-shadow:inset 1px 1px 0 rgba(255,255,255,.16),0 12px 32px rgba(20,16,60,.45)}
+.nav{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;background:none;border:none;color:var(--ink3);font-size:10px;font-weight:500;letter-spacing:.5px;cursor:pointer;padding:0 10px;font-family:var(--sans);flex:1;border-radius:14px}
+.nav .well{width:46px;height:29px;border-radius:12px;display:flex;align-items:center;justify-content:center}
+.nav .well .ic{width:19px;height:19px}
+.nav .nl{transition:none}
+.nav.act{color:var(--ink)}
+.nav.act .well{background:rgba(20,16,60,.32);box-shadow:inset 2px 2px 4px rgba(20,16,60,.4),inset -1px -1px 2px rgba(255,255,255,.22)}
+.nav:active:not(.act) .well{background:rgba(255,255,255,.07)}
+/* ---- 页面切换 & 入场交错 ---- */
+.page{display:none}
 .page.act{display:block}
-@keyframes pin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-.toast{position:fixed;bottom:calc(var(--th)+var(--sb)+20px);left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);border-radius:var(--r-full);padding:12px 24px;font-size:14px;font-weight:500;color:#fff;z-index:300;opacity:0;transition:all .4s;pointer-events:none;white-space:nowrap}
+.page.act>.card{animation:rise .36s cubic-bezier(.25,.8,.35,1) both}
+.page.act>.card:nth-child(1){animation-delay:0ms}
+.page.act>.card:nth-child(2){animation-delay:45ms}
+.page.act>.card:nth-child(3){animation-delay:90ms}
+.page.act>.card:nth-child(4){animation-delay:135ms}
+.page.act>.card:nth-child(5){animation-delay:180ms}
+.page.act>.card:nth-child(6){animation-delay:225ms}
+.header{animation:rise .36s cubic-bezier(.25,.8,.35,1) both}
+.hero{animation:rise .36s cubic-bezier(.25,.8,.35,1) both;animation-delay:50ms}
+.ps{animation:rise .36s cubic-bezier(.25,.8,.35,1) both;animation-delay:100ms}
+.ws{animation:rise .36s cubic-bezier(.25,.8,.35,1) both;animation-delay:150ms}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.toast{position:fixed;bottom:calc(var(--sb) + 88px);left:50%;transform:translateX(-50%) translateY(20px);background:rgba(43,47,74,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--bd);border-radius:var(--r-full);padding:12px 24px;font-size:14px;font-weight:500;color:var(--ink);z-index:300;opacity:0;transition:all .4s;pointer-events:none;white-space:nowrap;box-shadow:var(--env)}
 .toast.sh{opacity:1;transform:translateX(-50%) translateY(0)}
 .es{text-align:center;padding:24px 16px;color:var(--ink3)}
-.es .be{font-size:48px;margin-bottom:12px}
-@media(min-width:480px){body{max-width:430px;margin:0 auto}}
+button:focus-visible,a:focus-visible{outline:2px solid rgba(255,255,255,.45);outline-offset:2px}
+/* ---- 桌面端：氛围层延展，内容列不变 ---- */
+@media(min-width:480px){
+  .amb .g1{transform:scale(1.4) translate(70px,50px)}
+  .amb .g2{transform:scale(1.55) translate(-50px,-30px)}
+  .amb .g3{transform:scale(1.35) translate(-60px,-20px)}
+}
+/* ---- 动效降级 ---- */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
 </style>
 </head>
 <body>
 
+<div class="amb" aria-hidden="true"><i class="glow g1"></i><i class="glow g2"></i><i class="glow g3"></i></div>
+
+<main class="app">
+
 <div class="header">
-  <h1>🎯 雅思<span class="hl">7分</span>工作台</h1>
+  <h1><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>雅思<span class="hl">7分</span>工作台</h1>
   <div class="sub">学 · 练 · 复盘 · 打卡，一个地方搞定</div>
 </div>
 
-<div class="cd" id="cd">
+<div class="hero" id="cd">
   <div class="cd-l"><div class="days" id="dl">--</div><div class="label">距离目标考试</div></div>
   <div class="cd-r"><div class="badge" id="pb">基础补强期</div><div class="wl" id="wl"></div></div>
 </div>
 
 <div class="ps">
-  <div class="pi act" id="p1"><span class="dot"></span>🔵 基础<small>第1-4周</small></div>
-  <div class="pi" id="p2"><span class="dot"></span>🟠 强化<small>第5-8周</small></div>
-  <div class="pi" id="p3"><span class="dot"></span>🔴 冲刺<small>第9-12周</small></div>
+  <div class="pi act" id="p1"><span class="dot"></span>基础<small>第1-4周</small></div>
+  <div class="pi" id="p2"><span class="dot"></span>强化<small>第5-8周</small></div>
+  <div class="pi" id="p3"><span class="dot"></span>冲刺<small>第9-12周</small></div>
 </div>
 
 <div class="ws" id="ws"></div>
@@ -174,12 +260,12 @@ textarea.rin{resize:none;min-height:58px;line-height:1.6}
 <div class="page act" id="pgToday">
 
   <div class="card">
-    <div class="ct">⚡ 快速开始 <span class="hint">点开即学，少切窗口</span></div>
+    <div class="ct"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>快速开始 <span class="hint">点开即学，少切窗口</span></div>
     <div class="qrow" id="qs"></div>
   </div>
 
   <div class="card">
-    <div class="ct">📋 今日任务 <span class="hint">↗ 直达材料</span></div>
+    <div class="ct"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 17 2 2 4-4"/><path d="m3 7 2 2 4-4"/><path d="M13 6h8"/><path d="M13 12h8"/><path d="M13 18h8"/></svg>今日任务 <span class="hint">直达材料</span></div>
     <div id="tasks"></div>
     <div class="pb"><div class="fl" id="tfill" style="width:0%"></div></div>
     <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--ink3);margin-top:6px;font-weight:500">
@@ -188,7 +274,7 @@ textarea.rin{resize:none;min-height:58px;line-height:1.6}
   </div>
 
   <div class="card" id="cardReview">
-    <div class="ct">📝 每日复盘 <span class="hint">自动保存</span></div>
+    <div class="ct"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.376 3.622a1 1 0 0 1 3.002 3l-9.013 9.586a2 2 0 0 1-.838.572l-3.127 1.09a.5.5 0 0 1-.62-.62l1.09-3.128a2 2 0 0 1 .571-.838z"/></svg>每日复盘 <span class="hint">自动保存</span></div>
     <div class="dsum" id="dsum">今天还没完成任何任务</div>
     <div class="rvf">
       <div class="row">
@@ -201,18 +287,21 @@ textarea.rin{resize:none;min-height:58px;line-height:1.6}
   </div>
 
   <div class="card">
-    <div class="ct">📤 今日打卡 <span class="hint">复制发群</span></div>
+    <div class="ct"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>今日打卡 <span class="hint">复制发群</span></div>
     <div class="cibox" id="ciBox">先完成至少一项任务，再来生成打卡文案～</div>
-    <div class="tbtns"><button class="tbtn bl" id="ciCopy">📋 复制打卡文案</button></div>
+    <div class="fabrow">
+      <button class="fab" id="ciCopy" aria-label="复制打卡文案"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg></button>
+      <div class="fablab"><b>复制打卡文案</b><small>勾选任务后一键生成</small></div>
+    </div>
     <div class="cihint">勾选任务、填复盘都会实时更新上面的文案</div>
   </div>
 
   <div class="card">
-    <div class="ct">🏆 各科目标进度 <span class="hint">当前分 → 7.0</span></div>
-    <div class="sr"><div class="sl">👂 听力</div><div class="sb2 ls"><div class="fl" id="skL" style="width:0%"></div></div><div class="sc" id="scL">6.0</div></div>
-    <div class="sr"><div class="sl">📖 阅读</div><div class="sb2 rd"><div class="fl" id="skR" style="width:0%"></div></div><div class="sc" id="scR">6.0</div></div>
-    <div class="sr"><div class="sl">✍️ 写作</div><div class="sb2 wr"><div class="fl" id="skW" style="width:0%"></div></div><div class="sc" id="scW">5.0</div></div>
-    <div class="sr"><div class="sl">🗣 口语</div><div class="sb2 sp"><div class="fl" id="skS" style="width:0%"></div></div><div class="sc" id="scS">5.0</div></div>
+    <div class="ct"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>各科目标进度 <span class="hint">当前分 → 7.0</span></div>
+    <div class="sr"><span class="sl"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5Zm18 0h-3a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-5Z"/><path d="M3 14v-3a9 9 0 0 1 18 0v3"/></svg>听力</span><div class="sb2 ls"><div class="fl" id="skL" style="width:0%"></div></div><div class="sc" id="scL">6.0</div></div>
+    <div class="sr"><span class="sl"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>阅读</span><div class="sb2 rd"><div class="fl" id="skR" style="width:0%"></div></div><div class="sc" id="scR">6.0</div></div>
+    <div class="sr"><span class="sl"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>写作</span><div class="sb2 wr"><div class="fl" id="skW" style="width:0%"></div></div><div class="sc" id="scW">5.0</div></div>
+    <div class="sr"><span class="sl"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>口语</span><div class="sb2 sp"><div class="fl" id="skS" style="width:0%"></div></div><div class="sc" id="scS">5.0</div></div>
   </div>
 
 </div>
@@ -221,27 +310,27 @@ textarea.rin{resize:none;min-height:58px;line-height:1.6}
 <div class="page" id="pgWeek">
 
   <div class="card">
-    <div class="ct">🗓️ 本周打卡</div>
+    <div class="ct"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="M8 2v4"/><path d="M16 2v4"/><path d="M8 14h8"/></svg>本周打卡</div>
     <div class="wkg" id="wkg"></div>
   </div>
 
   <div class="card">
-    <div class="ct">📅 本周计划</div>
+    <div class="ct"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="M8 2v4"/><path d="M16 2v4"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/><path d="M16 18h.01"/></svg>本周计划</div>
     <div id="wp"></div>
   </div>
 
   <div class="card">
-    <div class="ct">🎬 课程安排</div>
+    <div class="ct"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.2 6 3 11l-.9-2.4c-.3-1.1.3-2.2 1.3-2.5l13.5-4c1.1-.3 2.2.3 2.5 1.3Z"/><path d="m6.2 5.3 3.1 3.9"/><path d="m12.4 3.4 3.1 4"/><path d="M3 11h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg>课程安排</div>
     <div id="cs"></div>
   </div>
 
   <div class="card">
-    <div class="ct">💡 本周提示</div>
+    <div class="ct"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>本周提示</div>
     <div id="wt" style="font-size:14px;color:var(--ink2);line-height:1.6"></div>
   </div>
 
   <div class="card">
-    <div class="ct">📈 近 7 天记录</div>
+    <div class="ct"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/></svg>近 7 天记录</div>
     <div id="hist"></div>
   </div>
 
@@ -249,25 +338,25 @@ textarea.rin{resize:none;min-height:58px;line-height:1.6}
 
 <!-- ============ 计时 ============ -->
 <div class="page" id="pgTimer">
-  <div class="card" style="background:var(--accent-soft);border:1px solid var(--accent-line)">
-    <div class="ct" style="justify-content:center;margin-bottom:4px">⏱️ 专注计时</div>
+  <div class="card" style="background:var(--accent-soft)">
+    <div class="ct" style="justify-content:center;margin-bottom:4px"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="10" x2="14" y1="2" y2="2"/><line x1="12" x2="15" y1="14" y2="11"/><circle cx="12" cy="14" r="8"/></svg>专注计时</div>
     <div class="td2"><div class="tm" id="tm">25:00</div></div>
     <div class="tpres" id="tpres">
-      <button class="tp act" data-m="25">🍅 25min</button>
-      <button class="tp" data-m="45">📚 45min</button>
-      <button class="tp" data-m="60">💪 60min</button>
+      <button class="tp act" data-m="25"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>25min</button>
+      <button class="tp" data-m="45"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>45min</button>
+      <button class="tp" data-m="60"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>60min</button>
     </div>
     <div class="tbtns">
-      <button class="tbtn st" id="tstart">▶ 开始</button>
-      <button class="tbtn rs" id="treset">↺ 重置</button>
+      <button class="tbtn st" id="tstart"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3"/></svg><span>开始</span></button>
+      <button class="tbtn rs" id="treset"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg><span>重置</span></button>
     </div>
   </div>
   <div class="card">
-    <div class="ct">📈 今日专注统计</div>
+    <div class="ct"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>今日专注统计</div>
     <div style="display:flex;align-items:center;justify-content:center;gap:16px;padding:8px 0">
-      <div style="text-align:center"><div style="font-size:36px;font-weight:800;color:var(--accent)" id="dpom">0</div><div style="font-size:12px;color:var(--ink3);font-weight:500">番茄完成</div></div>
-      <div style="width:1px;height:40px;background:var(--border-l)"></div>
-      <div style="text-align:center"><div style="font-size:36px;font-weight:800;color:var(--accent)" id="dmin">0</div><div style="font-size:12px;color:var(--ink3);font-weight:500">专注分钟</div></div>
+      <div style="text-align:center"><div style="font-size:38px;font-weight:300;color:var(--ink);font-variant-numeric:tabular-nums" id="dpom">0</div><div style="font-size:12px;color:var(--ink3);font-weight:500">番茄完成</div></div>
+      <div style="width:1px;height:40px;background:rgba(255,255,255,.14)"></div>
+      <div style="text-align:center"><div style="font-size:38px;font-weight:300;color:var(--ink);font-variant-numeric:tabular-nums" id="dmin">0</div><div style="font-size:12px;color:var(--ink3);font-weight:500">专注分钟</div></div>
     </div>
   </div>
 </div>
@@ -275,29 +364,29 @@ textarea.rin{resize:none;min-height:58px;line-height:1.6}
 <!-- ============ 资料 ============ -->
 <div class="page" id="pgResources">
   <div class="card">
-    <div class="ct">📚 推荐教材 <span class="hint">点我打开链接</span></div>
+    <div class="ct"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg>推荐教材 <span class="hint">点我打开链接</span></div>
     <div class="rg">
-      <a class="ri" href="https://search.jd.com/Search?keyword=售剑桥雅思真题8-19" target="_blank" rel="noopener"><span class="e">📘</span><span class="nm">剑桥雅思真题 8-19</span><span class="h">核心练习材料</span></a>
-      <a class="ri" href="https://search.jd.com/Search?keyword=王陆语料库雅思" target="_blank" rel="noopener"><span class="e">📗</span><span class="nm">王陆语料库</span><span class="h">听力词汇听写</span></a>
-      <a class="ri" href="https://search.jd.com/Search?keyword=刘洪波阅读真经总纲" target="_blank" rel="noopener"><span class="e">📕</span><span class="nm">刘洪波阅读真经</span><span class="h">阅读方法论</span></a>
-      <a class="ri" href="https://search.jd.com/Search?keyword=顾家北手把手教你雅思写作" target="_blank" rel="noopener"><span class="e">📙</span><span class="nm">顾家北手把手写作</span><span class="h">语法+逻辑</span></a>
-      <a class="ri" href="https://search.jd.com/Search?keyword=雅思词汇真经" target="_blank" rel="noopener"><span class="e">📒</span><span class="nm">雅思词汇真经</span><span class="h">核心词汇书</span></a>
-      <a class="ri" href="https://search.jd.com/Search?keyword=雅思口语机经" target="_blank" rel="noopener"><span class="e">📂</span><span class="nm">口语机经（当季）</span><span class="h">口语话题库</span></a>
+      <a class="ri" href="https://search.jd.com/Search?keyword=售剑桥雅思真题8-19" target="_blank" rel="noopener"><span class="e"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span><span class="nm">剑桥雅思真题 8-19</span><span class="h">核心练习材料</span></a>
+      <a class="ri" href="https://search.jd.com/Search?keyword=王陆语料库雅思" target="_blank" rel="noopener"><span class="e"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8.5a6.5 6.5 0 1 1 13 0c0 6-6 6-6 10a3.5 3.5 0 1 1-7 0"/><path d="M15 8.5a2.5 2.5 0 0 0-5 0v1a2 2 0 1 1 0 4"/></svg></span><span class="nm">王陆语料库</span><span class="h">听力词汇听写</span></a>
+      <a class="ri" href="https://search.jd.com/Search?keyword=刘洪波阅读真经总纲" target="_blank" rel="noopener"><span class="e"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></span><span class="nm">刘洪波阅读真经</span><span class="h">阅读方法论</span></a>
+      <a class="ri" href="https://search.jd.com/Search?keyword=顾家北手把手教你雅思写作" target="_blank" rel="noopener"><span class="e"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></span><span class="nm">顾家北手把手写作</span><span class="h">语法+逻辑</span></a>
+      <a class="ri" href="https://search.jd.com/Search?keyword=雅思词汇真经" target="_blank" rel="noopener"><span class="e"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg></span><span class="nm">雅思词汇真经</span><span class="h">核心词汇书</span></a>
+      <a class="ri" href="https://search.jd.com/Search?keyword=雅思口语机经" target="_blank" rel="noopener"><span class="e"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg></span><span class="nm">口语机经（当季）</span><span class="h">口语话题库</span></a>
     </div>
   </div>
   <div class="card">
-    <div class="ct">📱 必备工具</div>
+    <div class="ct"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>必备工具</div>
     <div class="rg">
-      <a class="ri" href="https://apps.apple.com/cn/app/id578380857" target="_blank" rel="noopener"><span class="e">📂</span><span class="nm">墨墨背单词</span><span class="h">IELTS 4000词库</span></a>
-      <a class="ri" href="https://apps.apple.com/cn/app/id966207540" target="_blank" rel="noopener"><span class="e">🎙️</span><span class="nm">雅思哥</span><span class="h">口语机经+模考</span></a>
-      <a class="ri" href="https://www.grammarly.com" target="_blank" rel="noopener"><span class="e">✏️</span><span class="nm">Grammarly</span><span class="h">AI写作批改</span></a>
-      <a class="ri" href="https://apps.apple.com/cn/app/id1119331792" target="_blank" rel="noopener"><span class="e">🎧</span><span class="nm">每日英语听力</span><span class="h">BBC/TED泛听</span></a>
-      <a class="ri" href="https://apps.ankiweb.net" target="_blank" rel="noopener"><span class="e">🃃</span><span class="nm">Anki</span><span class="h">间隔重复记忆</span></a>
-      <a class="ri" href="https://ieltscat.com" target="_blank" rel="noopener"><span class="e">🐱</span><span class="nm">雅思猫</span><span class="h">在线模考平台</span></a>
+      <a class="ri" href="https://apps.apple.com/cn/app/id578380857" target="_blank" rel="noopener"><span class="e"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" x2="15" y1="20" y2="20"/><line x1="12" x2="12" y1="4" y2="20"/></svg></span><span class="nm">墨墨背单词</span><span class="h">IELTS 4000词库</span></a>
+      <a class="ri" href="https://apps.apple.com/cn/app/id966207540" target="_blank" rel="noopener"><span class="e"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg></span><span class="nm">雅思哥</span><span class="h">口语机经+模考</span></a>
+      <a class="ri" href="https://www.grammarly.com" target="_blank" rel="noopener"><span class="e"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></span><span class="nm">Grammarly</span><span class="h">AI写作批改</span></a>
+      <a class="ri" href="https://apps.apple.com/cn/app/id1119331792" target="_blank" rel="noopener"><span class="e"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5Zm18 0h-3a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-5Z"/><path d="M3 14v-3a9 9 0 0 1 18 0v3"/></svg></span><span class="nm">每日英语听力</span><span class="h">BBC/TED泛听</span></a>
+      <a class="ri" href="https://apps.ankiweb.net" target="_blank" rel="noopener"><span class="e"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg></span><span class="nm">Anki</span><span class="h">间隔重复记忆</span></a>
+      <a class="ri" href="https://ieltscat.com" target="_blank" rel="noopener"><span class="e"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg></span><span class="nm">雅思猫</span><span class="h">在线模考平台</span></a>
     </div>
   </div>
   <div class="card">
-    <div class="ct">🎬 课程回放</div>
+    <div class="ct"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 7.75a.75.75 0 0 1 1.142-.638l3.664 2.249a.75.75 0 0 1 0 1.278l-3.664 2.25a.75.75 0 0 1-1.142-.64z"/><path d="M12 17v4"/><path d="M8 21h8"/><rect x="2" y="3" width="20" height="14" rx="2"/></svg>课程回放</div>
     <div style="font-size:13px;color:var(--ink3);line-height:1.8">课程链接请联系北外e课堂老师获取</div>
   </div>
 </div>
@@ -305,39 +394,62 @@ textarea.rin{resize:none;min-height:58px;line-height:1.6}
 <!-- ============ 设置 ============ -->
 <div class="page" id="pgSettings">
   <div class="card">
-    <div class="ct">⚙️ 目标设置</div>
+    <div class="ct"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>目标设置</div>
     <div class="setr"><label>目标考试日期</label><input type="date" id="examDate"></div>
     <div class="setr"><label>开始学习日期</label><input type="date" id="startDate"></div>
-    <div class="setr"><label>👂 听力</label><input type="number" id="lvlL" min="0" max="9" step="0.5"></div>
-    <div class="setr"><label>📖 阅读</label><input type="number" id="lvlR" min="0" max="9" step="0.5"></div>
-    <div class="setr"><label>✍️ 写作</label><input type="number" id="lvlW" min="0" max="9" step="0.5"></div>
-    <div class="setr"><label>🗣 口语</label><input type="number" id="lvlS" min="0" max="9" step="0.5"></div>
+    <div class="setr"><label><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5Zm18 0h-3a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-5Z"/><path d="M3 14v-3a9 9 0 0 1 18 0v3"/></svg>听力</label><input type="number" id="lvlL" min="0" max="9" step="0.5"></div>
+    <div class="setr"><label><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>阅读</label><input type="number" id="lvlR" min="0" max="9" step="0.5"></div>
+    <div class="setr"><label><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>写作</label><input type="number" id="lvlW" min="0" max="9" step="0.5"></div>
+    <div class="setr"><label><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>口语</label><input type="number" id="lvlS" min="0" max="9" step="0.5"></div>
   </div>
 
   <div class="card">
-    <div class="ct">🔄 数据备份 <span class="hint">换设备搬运用</span></div>
+    <div class="ct"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/></svg>数据备份 <span class="hint">换设备搬运用</span></div>
     <div class="snote">数据保存在「本设备」的浏览器里，电脑和手机互不相通。换设备时：旧设备点「导出」→ 文案发到微信文件传输助手 → 新设备粘贴到下面输入框 → 点「导入」。</div>
-    <button class="impbtn" id="expBtn" style="margin-top:0">📤 导出全部数据（复制到剪贴板）</button>
+    <button class="impbtn" id="expBtn" style="margin-top:0"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>导出全部数据（复制到剪贴板）</button>
     <textarea class="rin" id="impTa" placeholder="把导出的数据粘贴到这里…" style="margin-top:10px;font-size:12px;min-height:64px"></textarea>
-    <button class="impbtn" id="impBtn">📥 导入数据</button>
+    <button class="impbtn" id="impBtn"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>导入数据</button>
   </div>
 
   <div class="card">
-    <button class="rbtn" onclick="resetAll()">⚠️ 重置所有学习数据</button>
+    <button class="rbtn" onclick="resetAll()"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>重置所有学习数据</button>
   </div>
 </div>
+
+</main>
 
 <div class="toast" id="toast"></div>
 
 <nav class="bnav">
-  <button class="nav act" data-p="pgToday"><span>📋</span><span>今日</span></button>
-  <button class="nav" data-p="pgWeek"><span>📅</span><span>计划</span></button>
-  <button class="nav" data-p="pgTimer"><span>⏱️</span><span>计时</span></button>
-  <button class="nav" data-p="pgResources"><span>📖</span><span>资料</span></button>
-  <button class="nav" data-p="pgSettings"><span>⚙️</span><span>设置</span></button>
+  <button class="nav act" data-p="pgToday"><span class="well"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg></span><span class="nl">今日</span></button>
+  <button class="nav" data-p="pgWeek"><span class="well"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="M8 2v4"/><path d="M16 2v4"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/><path d="M16 18h.01"/></svg></span><span class="nl">计划</span></button>
+  <button class="nav" data-p="pgTimer"><span class="well"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="10" x2="14" y1="2" y2="2"/><line x1="12" x2="15" y1="14" y2="11"/><circle cx="12" cy="14" r="8"/></svg></span><span class="nl">计时</span></button>
+  <button class="nav" data-p="pgResources"><span class="well"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span><span class="nl">资料</span></button>
+  <button class="nav" data-p="pgSettings"><span class="well"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg></span><span class="nl">设置</span></button>
 </nav>
 
 <script>
+/* ================= 视觉资产：Lucide 内联 SVG（仅图标视觉层，无外链） ================= */
+function ic(n,s){const D={
+  sunrise:'<path d="M12 2v8"/><path d="m4.93 10.93 1.41 1.41"/><path d="M2 18h2"/><path d="M20 18h2"/><path d="m19.07 10.93-1.41 1.41"/><path d="M22 22H2"/><path d="m8 6 4-4 4 4"/><path d="M16 18a4 4 0 0 0-8 0"/>',
+  "book-open":'<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>',
+  moon:'<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>',
+  "circle-plus":'<circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/>',
+  type:'<polyline points="4 7 4 4 20 4 20 7"/><line x1="9" x2="15" y1="20" y2="20"/><line x1="12" x2="12" y1="4" y2="20"/>',
+  "rotate-ccw":'<path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/>',
+  clapperboard:'<path d="M20.2 6 3 11l-.9-2.4c-.3-1.1.3-2.2 1.3-2.5l13.5-4c1.1-.3 2.2.3 2.5 1.3Z"/><path d="m6.2 5.3 3.1 3.9"/><path d="m12.4 3.4 3.1 4"/><path d="M3 11h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/>',
+  pencil:'<path d="M12 20h9"/><path d="M16.376 3.622a1 1 0 0 1 3.002 3l-9.013 9.586a2 2 0 0 1-.838.572l-3.127 1.09a.5.5 0 0 1-.62-.62l1.09-3.128a2 2 0 0 1 .571-.838z"/>',
+  "arrow-up-right":'<path d="M7 7h10v10"/><path d="M7 17 17 7"/>',
+  trophy:'<path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>',
+  headphones:'<path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5Zm18 0h-3a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-5Z"/><path d="M3 14v-3a9 9 0 0 1 18 0v3"/>',
+  "message-circle":'<path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/>',
+  monitor:'<rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/>',
+  "circle-check":'<circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/>',
+  layers:'<path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/>',
+  play:'<polygon points="6 3 20 12 6 21 6 3"/>',
+  pause:'<rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/>'
+};return '<svg class="ic'+(s?" "+s:"")+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+D[n]+'</svg>'}
+
 /* ================= 材料库：id -> 名称 + 链接 ================= */
 const MAT={
   momo:{n:"墨墨背单词",u:"https://apps.apple.com/cn/app/id578380857"},
@@ -353,7 +465,8 @@ const MAT={
   jj:{n:"口语机经",u:"https://search.jd.com/Search?keyword=雅思口语机经"}
 };
 /* 快速启动栏 */
-const QUICK=[["tsl","🎧 每日英语听力"],["momo","📂 墨墨背单词"],["ysg","🎙️ 雅思哥"],["cat","🐱 雅思猫模考"],["grm","✏️ Grammarly"],["anki","🃃 Anki"]];
+const QUICK=[["tsl","每日英语听力"],["momo","墨墨背单词"],["ysg","雅思哥"],["cat","雅思猫模考"],["grm","Grammarly"],["anki","Anki"]];
+const QICON={tsl:"headphones",momo:"type",ysg:"message-circle",cat:"monitor",grm:"circle-check",anki:"layers"};
 
 /* ================= 12 周计划（daily 内容 + 对应材料） ================= */
 const P={
@@ -433,21 +546,21 @@ function gT(w){
   const p=P.weeks[w];if(!p)return[];
   const d=p.daily;
   const t=[
-    {id:"m",icon:"🌅",lab:"早间",txt:d.m[0],mat:d.m[1],desc:"30min"},
-    {id:"n",icon:"📚",lab:"主课",txt:d.n[0],mat:d.n[1],desc:"1.5-2h"},
-    {id:"e",icon:"🌙",lab:"晚间",txt:d.e[0],mat:d.e[1],desc:"30min-1h"},
-    {id:"x",icon:"💪",lab:"附加",txt:d.x[0],mat:d.x[1],desc:"有余力再做"},
-    {id:"w",icon:"📝",lab:"单词打卡",txt:"背30个新词+复习",mat:"momo",desc:"30min"},
-    {id:"r",icon:"🔄",lab:"错题复盘",txt:"整理今日错题并填写复盘",mat:"#review",desc:"10min"}
+    {id:"m",icon:ic("sunrise"),lab:"早间",txt:d.m[0],mat:d.m[1],desc:"30min"},
+    {id:"n",icon:ic("book-open"),lab:"主课",txt:d.n[0],mat:d.n[1],desc:"1.5-2h"},
+    {id:"e",icon:ic("moon"),lab:"晚间",txt:d.e[0],mat:d.e[1],desc:"30min-1h"},
+    {id:"x",icon:ic("circle-plus"),lab:"附加",txt:d.x[0],mat:d.x[1],desc:"有余力再做"},
+    {id:"w",icon:ic("type"),lab:"单词打卡",txt:"背30个新词+复习",mat:"momo",desc:"30min"},
+    {id:"r",icon:ic("rotate-ccw"),lab:"错题复盘",txt:"整理今日错题并填写复盘",mat:"#review",desc:"10min"}
   ];
-  (p.courses||[]).forEach((c,i)=>t.unshift({id:"c"+i,icon:"🎬",lab:c,txt:c.replace(/^看课程：/,""),mat:null,desc:"认真听课做好笔记"}));
+  (p.courses||[]).forEach((c,i)=>t.unshift({id:"c"+i,icon:ic("clapperboard"),lab:c,txt:c.replace(/^看课程：/,""),mat:null,desc:"认真听课做好笔记"}));
   return t;
 }
 
 /* ================= 渲染 ================= */
 function renderAll(){
   const w=wk(),d=todayKey();
-  document.getElementById("dl").textContent=(()=>{const x=dl();return x>0?x:"🎉"})();
+  document.getElementById("dl").innerHTML=(()=>{const x=dl();return x>0?x:ic("trophy")})();
   document.getElementById("pb").textContent=P.phases[ph(w)].name;
   document.getElementById("wl").textContent=P.weeks[w].name+" 周"+"日一二三四五六"[new Date().getDay()];
   document.querySelectorAll(".pi").forEach((e,i)=>e.classList.toggle("act",i===ph(w)));
@@ -484,14 +597,14 @@ function rQS(){
   const c=document.getElementById("qs");c.innerHTML="";
   QUICK.forEach(([k,label])=>{
     const a=document.createElement("a");a.className="qchip";a.href=MAT[k].u;a.target="_blank";a.rel="noopener";
-    a.textContent=label;c.appendChild(a);
+    a.innerHTML=ic(QICON[k])+"<span>"+label+"</span>";c.appendChild(a);
   });
 }
 
 function linkChip(mat){
   if(!mat)return"";
-  if(mat==="#review")return '<button class="tlink" data-review="1" title="去填写复盘">📝<span class="ln">复盘</span></button>';
-  return '<a class="tlink" href="'+MAT[mat].u+'" target="_blank" rel="noopener" title="'+MAT[mat].n+'">↗<span class="ln">'+MAT[mat].n+'</span></a>';
+  if(mat==="#review")return '<button class="tlink" data-review="1" title="去填写复盘">'+ic("pencil")+'<span class="ln">复盘</span></button>';
+  return '<a class="tlink" href="'+MAT[mat].u+'" target="_blank" rel="noopener" title="'+MAT[mat].n+'">'+ic("arrow-up-right")+'<span class="ln">'+MAT[mat].n+'</span></a>';
 }
 
 function rT(w){
@@ -502,7 +615,7 @@ function rT(w){
     const ch=!!day.checks[t.id];if(ch)doneN++;
     const e=document.createElement("div");e.className="task";
     e.innerHTML='<input type="checkbox" class="tc" '+(ch?"checked":"")+' data-k="'+t.id+'">'
-      +'<div class="tk"><div class="tt">'+(t.id[0]==="c" ? t.icon+" "+t.txt : t.icon+" "+t.lab+"｜"+t.txt)+'</div><div class="td">'+t.desc+'</div></div>'
+      +'<div class="tk"><div class="tt">'+(t.id[0]==="c" ? t.icon+"<span>"+t.txt+"</span>" : t.icon+"<span>"+t.lab+"｜"+t.txt+"</span>")+'</div><div class="td">'+t.desc+'</div></div>'
       +linkChip(t.mat);
     c.appendChild(e);
     e.querySelector(".tc").addEventListener("change",function(){
@@ -600,9 +713,9 @@ function rHIST(){
 function rWP(w){
   const c=document.getElementById("wp"),p=P.weeks[w];
   if(!p){c.innerHTML='<div class="es"><p>暂无数据</p></div>';return}
-  c.innerHTML='<div style="margin-bottom:8px"><span style="font-size:18px;font-weight:700">'+p.name+"</span></div>"
+  c.innerHTML='<div style="margin-bottom:8px"><span style="font-size:18px;font-weight:600">'+p.name+"</span></div>"
     +'<div style="font-size:13px;line-height:2.2;color:var(--ink2)">'
-    +"<div>🌅 早间："+p.daily.m[0]+"</div><div>📚 主课："+p.daily.n[0]+"</div><div>🌙 晚间："+p.daily.e[0]+"</div><div>💪 附加："+p.daily.x[0]+"</div></div>";
+    +"<div>"+ic("sunrise","i14")+" 早间："+p.daily.m[0]+"</div><div>"+ic("book-open","i14")+" 主课："+p.daily.n[0]+"</div><div>"+ic("moon","i14")+" 晚间："+p.daily.e[0]+"</div><div>"+ic("circle-plus","i14")+" 附加："+p.daily.x[0]+"</div></div>";
 }
 function rCS(w){
   const c=document.getElementById("cs"),p=P.weeks[w];
@@ -610,8 +723,8 @@ function rCS(w){
   c.innerHTML="";
   p.courses.forEach(cs=>{
     const d=document.createElement("div");
-    d.style.cssText="padding:10px 14px;background:var(--bg-soft);border-radius:var(--r-sm);margin-bottom:6px;font-size:13px;font-weight:500;border:1px solid var(--border-l)";
-    d.textContent="🎬 "+cs;c.appendChild(d);
+    d.style.cssText="display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--bg-soft);border-radius:var(--r-sm);margin-bottom:6px;font-size:13px;font-weight:500;border:1px solid var(--border-l);color:var(--ink2)";
+    d.innerHTML=ic("clapperboard","i14")+"<span>"+cs+"</span>";c.appendChild(d);
   });
 }
 
@@ -620,20 +733,20 @@ let ti=null,ts=1500,tr=false,tmr=25;
 function uT(){const m=Math.floor(ts/60),s=ts%60;document.getElementById("tm").textContent=pad(m)+":"+pad(s)}
 function sT(){
   if(tr)return;tr=true;
-  document.getElementById("tstart").textContent="⏸ 暂停";document.getElementById("tstart").className="tbtn pa";
+  document.getElementById("tstart").innerHTML=ic("pause")+"<span>暂停</span>";document.getElementById("tstart").className="tbtn pa";
   ti=setInterval(()=>{
     ts--;uT();
     if(ts<=0){
       clearInterval(ti);tr=false;
-      document.getElementById("tstart").textContent="▶ 开始";document.getElementById("tstart").className="tbtn st";
+      document.getElementById("tstart").innerHTML=ic("play")+"<span>开始</span>";document.getElementById("tstart").className="tbtn st";
       const day=getDay(todayKey());day.poms++;day.mins+=tmr;save();
       document.getElementById("dpom").textContent=day.poms;document.getElementById("dmin").textContent=day.mins;
       toastMsg("🎉 太棒了！休息一下，顺手勾掉对应任务");
     }
   },1000);
 }
-function pT(){clearInterval(ti);tr=false;document.getElementById("tstart").textContent="▶ 继续";document.getElementById("tstart").className="tbtn st"}
-function rT2(){clearInterval(ti);tr=false;ts=tmr*60;uT();document.getElementById("tstart").textContent="▶ 开始";document.getElementById("tstart").className="tbtn st"}
+function pT(){clearInterval(ti);tr=false;document.getElementById("tstart").innerHTML=ic("play")+"<span>继续</span>";document.getElementById("tstart").className="tbtn st"}
+function rT2(){clearInterval(ti);tr=false;ts=tmr*60;uT();document.getElementById("tstart").innerHTML=ic("play")+"<span>开始</span>";document.getElementById("tstart").className="tbtn st"}
 
 /* ================= 设置 & 备份 ================= */
 function resetAll(){
@@ -700,7 +813,7 @@ document.querySelectorAll(".tp").forEach(b=>{
     if(tr){clearInterval(ti);tr=false}
     document.querySelectorAll(".tp").forEach(x=>x.classList.remove("act"));
     this.classList.add("act");tmr=parseInt(this.dataset.m);ts=tmr*60;uT();
-    document.getElementById("tstart").textContent="▶ 开始";document.getElementById("tstart").className="tbtn st";
+    document.getElementById("tstart").innerHTML=ic("play")+"<span>开始</span>";document.getElementById("tstart").className="tbtn st";
   });
 });
 
